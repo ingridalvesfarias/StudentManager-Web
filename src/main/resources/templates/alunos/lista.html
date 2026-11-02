@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alunos - Student Manager</title>
+</head>
+<body>
+    <h1>Lista de alunos</h1>
+
+    <p th:if="${#lists.isEmpty(alunos)}">Nenhum aluno cadastrado.</p>
+
+    <table th:unless="${#lists.isEmpty(alunos)}" border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Curso</th>
+                <th>Notas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.matricula}">2024001</td>
+                <td th:text="${aluno.nome}">Nome</td>
+                <td th:text="${aluno.idade}">20</td>
+                <td th:text="${aluno.curso}">Curso</td>
+                <td th:text="${aluno.notas}">[]</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{/}">Voltar ao início</a></p>
+</body>
+</html>

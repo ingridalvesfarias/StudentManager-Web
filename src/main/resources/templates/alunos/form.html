@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo aluno - Student Manager</title>
+</head>
+<body>
+    <h1>Cadastrar aluno</h1>
+
+    <form th:action="@{/alunos}" th:object="${alunoForm}" method="post">
+
+        <p>
+            <label for="nome">Nome completo</label><br>
+            <input type="text" th:field="*{nome}">
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        </p>
+
+        <p>
+            <label for="idade">Idade</label><br>
+            <input type="number" th:field="*{idade}">
+            <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}"></span>
+        </p>
+
+        <p>
+            <label for="matricula">Matrícula</label><br>
+            <input type="text" th:field="*{matricula}">
+            <span th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></span>
+        </p>
+
+        <p>
+            <label for="curso">Curso/turma</label><br>
+            <input type="text" th:field="*{curso}">
+            <span th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></span>
+        </p>
+
+        <button type="submit">Cadastrar</button>
+        <a th:href="@{/alunos}">Cancelar</a>
+    </form>
+</body>
+</html>

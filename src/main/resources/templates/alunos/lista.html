@@ -11,6 +11,7 @@
     <h1>Lista de alunos</h1>
 
     <p th:if="${mensagem}" th:text="${mensagem}"></p>
+    <p th:if="${erro}" th:text="${erro}"></p>
     <p><a th:href="@{/alunos/novo}">+ Novo aluno</a></p>
 
     <p th:if="${#lists.isEmpty(alunos)}">Nenhum aluno cadastrado.</p>
@@ -23,6 +24,7 @@
                 <th>Idade</th>
                 <th>Curso</th>
                 <th>Notas</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +34,10 @@
                 <td th:text="${aluno.idade}">20</td>
                 <td th:text="${aluno.curso}">Curso</td>
                 <td th:text="${aluno.notas}">[]</td>
+                <td>
+                    <a th:href="@{/alunos/{matricula}/notas(matricula=${aluno.matricula})}">Notas</a> |
+                    <a th:href="@{/alunos/{matricula}/desempenho(matricula=${aluno.matricula})}">Desempenho</a>
+                </td>
             </tr>
         </tbody>
     </table>

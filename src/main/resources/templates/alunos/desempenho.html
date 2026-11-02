@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho - Student Manager</title>
+</head>
+<body>
+    <h1>Desempenho acadêmico</h1>
+
+    <p><strong>Aluno:</strong> <span th:text="${desempenho.aluno().nome}">Nome</span></p>
+    <p><strong>Notas:</strong> <span th:text="${desempenho.aluno().notas}">[]</span></p>
+    <p><strong>Média:</strong> <span th:text="${#numbers.formatDecimal(desempenho.media(), 1, 2)}">0,00</span></p>
+    <p><strong>Situação:</strong> <span th:text="${desempenho.situacao().descricao}">Aprovado</span></p>
+
+    <p><a th:href="@{/alunos}">Voltar à lista</a></p>
+</body>
+</html>

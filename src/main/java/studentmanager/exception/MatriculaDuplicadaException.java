@@ -1,4 +1,4 @@
-package exception;
+package studentmanager.exception;
 
 /**
  * Lançada ao tentar cadastrar um aluno com matrícula que já existe.

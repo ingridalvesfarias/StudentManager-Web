@@ -182,4 +182,4 @@ No Linux ou macOS:
 
 ## 👩‍💻 Autora
 
-**Ingrid Farias** — [GitHub](https://github.com/ingridalvesfarias)
+**Ingrid Farias** — [GitHub](https://github.com/ingridalvesfarias) 

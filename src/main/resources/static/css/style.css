@@ -1,0 +1,306 @@
+:root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --on-primary: #ffffff;
+    --ok: #15803d;
+    --ok-bg: #dcfce7;
+    --erro: #b91c1c;
+    --erro-bg: #fee2e2;
+    --aviso: #b45309;
+    --aviso-bg: #fef3c7;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1117;
+        --card: #181b23;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --border: #2a2f3a;
+        --primary: #818cf8;
+        --primary-hover: #a5b4fc;
+        --on-primary: #0f1117;
+        --ok: #86efac;
+        --ok-bg: #14351f;
+        --erro: #fca5a5;
+        --erro-bg: #3b1515;
+        --aviso: #fcd34d;
+        --aviso-bg: #3a2d0f;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+a {
+    color: var(--primary);
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.topo {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+
+.conteudo-topo {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.marca {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.topo nav a {
+    margin-left: 16px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.topo nav a:hover {
+    color: var(--primary);
+}
+
+/* ---------- Conteúdo ---------- */
+
+main {
+    max-width: 960px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+/* ---------- Tabelas ---------- */
+
+.tabela-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+tbody tr:hover {
+    background: color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+.acoes a {
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.perigo {
+    color: var(--erro);
+}
+
+/* ---------- Botões ---------- */
+
+.botao,
+button {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--on-primary);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.botao:hover,
+button:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.botao-secundario {
+    background: transparent;
+    color: var(--primary);
+}
+
+.botao-secundario:hover {
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    color: var(--primary);
+}
+
+.botao-perigo {
+    background: var(--erro);
+    border-color: var(--erro);
+    color: var(--card);
+}
+
+.botao-perigo:hover {
+    background: var(--erro);
+    border-color: var(--erro);
+    opacity: 0.85;
+}
+
+/* ---------- Formulários ---------- */
+
+.campo {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    max-width: 420px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+}
+
+input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+.erro-campo {
+    display: block;
+    color: var(--erro);
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+.form-acoes {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+/* ---------- Mensagens ---------- */
+
+.mensagem,
+.erro,
+.aviso {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.mensagem {
+    background: var(--ok-bg);
+    color: var(--ok);
+}
+
+.erro {
+    background: var(--erro-bg);
+    color: var(--erro);
+}
+
+.aviso {
+    background: var(--aviso-bg);
+    color: var(--aviso);
+}
+
+/* ---------- Relatório e desempenho ---------- */
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.resumo .item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.resumo .numero {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.resumo .rotulo {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.selo {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.selo-aprovado {
+    background: var(--ok-bg);
+    color: var(--ok);
+}
+
+.selo-recuperacao {
+    background: var(--aviso-bg);
+    color: var(--aviso);
+}
+
+.selo-reprovado {
+    background: var(--erro-bg);
+    color: var(--erro);
+}

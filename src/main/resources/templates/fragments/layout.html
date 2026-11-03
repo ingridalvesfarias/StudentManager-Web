@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo} + ' - Student Manager'">Student Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header class="topo" th:fragment="cabecalho">
+        <div class="conteudo-topo">
+            <a class="marca" th:href="@{/}">🎓 Student Manager</a>
+            <nav>
+                <a th:href="@{/alunos}">Alunos</a>
+                <a th:href="@{/alunos/novo}">Novo aluno</a>
+                <a th:href="@{/relatorio}">Relatório</a>
+            </nav>
+        </div>
+    </header>
+</body>
+
+</html>

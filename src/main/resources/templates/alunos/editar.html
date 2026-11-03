@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar aluno - Student Manager</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Editar aluno')}"></head>
 <body>
-    <h1>Editar aluno</h1>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
 
-    <p>
-        <strong>Matrícula:</strong> <span th:text="${aluno.matricula}">2024001</span>
-        (não pode ser alterada)
-    </p>
+    <main>
+        <h1>Editar aluno</h1>
 
-    <form th:action="@{/alunos/{matricula}/editar(matricula=${aluno.matricula})}"
-          th:object="${editarAlunoForm}" method="post">
+        <div class="card">
+            <p>
+                <strong>Matrícula:</strong> <span th:text="${aluno.matricula}">2024001</span>
+                (não pode ser alterada)
+            </p>
 
-        <p>
-            <label for="nome">Nome completo</label><br>
-            <input type="text" th:field="*{nome}">
-            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-        </p>
+            <form th:action="@{/alunos/{matricula}/editar(matricula=${aluno.matricula})}"
+                  th:object="${editarAlunoForm}" method="post">
 
-        <p>
-            <label for="idade">Idade</label><br>
-            <input type="number" th:field="*{idade}">
-            <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}"></span>
-        </p>
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" th:field="*{nome}">
+                    <span class="erro-campo" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                </div>
 
-        <p>
-            <label for="curso">Curso/turma</label><br>
-            <input type="text" th:field="*{curso}">
-            <span th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></span>
-        </p>
+                <div class="campo">
+                    <label for="idade">Idade</label>
+                    <input type="number" th:field="*{idade}">
+                    <span class="erro-campo" th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}"></span>
+                </div>
 
-        <button type="submit">Salvar alterações</button>
-        <a th:href="@{/alunos}">Cancelar</a>
-    </form>
+                <div class="campo">
+                    <label for="curso">Curso/turma</label>
+                    <input type="text" th:field="*{curso}">
+                    <span class="erro-campo" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></span>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit">Salvar alterações</button>
+                    <a th:href="@{/alunos}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

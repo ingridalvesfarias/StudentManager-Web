@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório geral - Student Manager</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Relatório')}"></head>
 <body>
-    <h1>Relatório geral da turma</h1>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
 
-    <table border="1" cellpadding="6">
-        <tr>
-            <th>Total de alunos</th>
-            <td th:text="${relatorio.totalAlunos()}">0</td>
-        </tr>
-        <tr>
-            <th>Alunos avaliados</th>
-            <td th:text="${relatorio.avaliados()}">0</td>
-        </tr>
-        <tr>
-            <th>Aprovados</th>
-            <td th:text="${relatorio.aprovados()}">0</td>
-        </tr>
-        <tr>
-            <th>Em recuperação</th>
-            <td th:text="${relatorio.emRecuperacao()}">0</td>
-        </tr>
-        <tr>
-            <th>Reprovados</th>
-            <td th:text="${relatorio.reprovados()}">0</td>
-        </tr>
-        <tr>
-            <th>Média geral da turma</th>
-            <td th:text="${#numbers.formatDecimal(relatorio.mediaGeral(), 1, 2)}">0,00</td>
-        </tr>
-    </table>
+    <main>
+        <h1>Relatório geral da turma</h1>
 
-    <p th:if="${relatorio.avaliados() < relatorio.totalAlunos()}">
-        Alunos com menos de
-        <span th:text="${T(studentmanager.model.Aluno).MIN_NOTAS}">2</span>
-        notas não entram nas médias.
-    </p>
+        <div class="resumo">
+            <div class="item">
+                <span class="numero" th:text="${relatorio.totalAlunos()}">0</span>
+                <span class="rotulo">Total de alunos</span>
+            </div>
+            <div class="item">
+                <span class="numero" th:text="${relatorio.avaliados()}">0</span>
+                <span class="rotulo">Alunos avaliados</span>
+            </div>
+            <div class="item">
+                <span class="numero" th:text="${relatorio.aprovados()}">0</span>
+                <span class="rotulo">Aprovados</span>
+            </div>
+            <div class="item">
+                <span class="numero" th:text="${relatorio.emRecuperacao()}">0</span>
+                <span class="rotulo">Em recuperação</span>
+            </div>
+            <div class="item">
+                <span class="numero" th:text="${relatorio.reprovados()}">0</span>
+                <span class="rotulo">Reprovados</span>
+            </div>
+            <div class="item">
+                <span class="numero" th:text="${#numbers.formatDecimal(relatorio.mediaGeral(), 1, 2)}">0,00</span>
+                <span class="rotulo">Média geral da turma</span>
+            </div>
+        </div>
 
-    <p><a th:href="@{/alunos}">Ver alunos</a> | <a th:href="@{/}">Voltar ao início</a></p>
+        <p class="aviso" th:if="${relatorio.avaliados() < relatorio.totalAlunos()}">
+            Alunos com menos de
+            <span th:text="${T(studentmanager.model.Aluno).MIN_NOTAS}">2</span>
+            notas não entram nas médias.
+        </p>
+
+        <p><a class="botao botao-secundario" th:href="@{/alunos}">Ver alunos</a></p>
+    </main>
 </body>
 </html>

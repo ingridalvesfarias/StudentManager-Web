@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desempenho - Student Manager</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Desempenho')}"></head>
 <body>
-    <h1>Desempenho acadêmico</h1>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
 
-    <p><strong>Aluno:</strong> <span th:text="${desempenho.aluno().nome}">Nome</span></p>
-    <p><strong>Notas:</strong> <span th:text="${desempenho.aluno().notas}">[]</span></p>
-    <p><strong>Média:</strong> <span th:text="${#numbers.formatDecimal(desempenho.media(), 1, 2)}">0,00</span></p>
-    <p><strong>Situação:</strong> <span th:text="${desempenho.situacao().descricao}">Aprovado</span></p>
+    <main>
+        <h1>Desempenho acadêmico</h1>
 
-    <p><a th:href="@{/alunos}">Voltar à lista</a></p>
+        <div class="card">
+            <p><strong>Aluno:</strong> <span th:text="${desempenho.aluno().nome}">Nome</span></p>
+            <p><strong>Notas:</strong> <span th:text="${desempenho.aluno().notas}">[]</span></p>
+            <p><strong>Média:</strong>
+                <span th:text="${#numbers.formatDecimal(desempenho.media(), 1, 2)}">0,00</span></p>
+            <p><strong>Situação:</strong>
+                <span class="selo"
+                      th:classappend="${'selo-' + #strings.toLowerCase(desempenho.situacao().name())}"
+                      th:text="${desempenho.situacao().descricao}">Aprovado</span></p>
+        </div>
+
+        <p><a class="botao botao-secundario" th:href="@{/alunos}">Voltar à lista</a></p>
+    </main>
 </body>
 </html>

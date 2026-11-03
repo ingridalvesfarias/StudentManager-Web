@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remover aluno - Student Manager</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Remover aluno')}"></head>
 <body>
-    <h1>Remover aluno</h1>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
 
-    <p>
-        Tem certeza de que deseja remover
-        <strong th:text="${aluno.nome}">Nome</strong>
-        (matrícula <span th:text="${aluno.matricula}">2024001</span>)?
-    </p>
-    <p>Esta ação não pode ser desfeita.</p>
+    <main>
+        <h1>Remover aluno</h1>
 
-    <form th:action="@{/alunos/{matricula}/remover(matricula=${aluno.matricula})}" method="post">
-        <button type="submit">Sim, remover</button>
-        <a th:href="@{/alunos}">Cancelar</a>
-    </form>
+        <div class="card">
+            <p>
+                Tem certeza de que deseja remover
+                <strong th:text="${aluno.nome}">Nome</strong>
+                (matrícula <span th:text="${aluno.matricula}">2024001</span>)?
+            </p>
+            <p>Esta ação não pode ser desfeita.</p>
+
+            <form th:action="@{/alunos/{matricula}/remover(matricula=${aluno.matricula})}" method="post">
+                <div class="form-acoes">
+                    <button class="botao-perigo" type="submit">Sim, remover</button>
+                    <a th:href="@{/alunos}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

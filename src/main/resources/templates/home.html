@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Manager</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Início')}"></head>
 <body>
-    <h1 th:text="${titulo}">Título</h1>
-    <p>Sistema de gerenciamento escolar rodando na web!</p>
-    <p>Alunos cadastrados: <span th:text="${totalAlunos}">0</span></p>
-    <p><a th:href="@{/alunos}">Ver alunos</a></p>
-    <p><a th:href="@{/relatorio}">Relatório geral</a></p>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
+
+    <main>
+        <div class="card">
+            <h1 th:text="${titulo}">Student Manager</h1>
+            <p>Sistema de gerenciamento escolar rodando na web!</p>
+            <p>Alunos cadastrados: <strong th:text="${totalAlunos}">0</strong></p>
+            <p>
+                <a class="botao" th:href="@{/alunos}">Ver alunos</a>
+                <a class="botao botao-secundario" th:href="@{/relatorio}">Relatório geral</a>
+            </p>
+        </div>
+    </main>
 </body>
 </html>

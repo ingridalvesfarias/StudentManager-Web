@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alunos - Student Manager</title>
-</head>
-
+<head th:replace="~{fragments/layout :: head('Alunos')}"></head>
 <body>
-    <h1>Lista de alunos</h1>
+    <header th:replace="~{fragments/layout :: cabecalho}"></header>
 
-    <p th:if="${mensagem}" th:text="${mensagem}"></p>
-    <p th:if="${erro}" th:text="${erro}"></p>
-    <p><a th:href="@{/alunos/novo}">+ Novo aluno</a></p>
+    <main>
+        <h1>Lista de alunos</h1>
 
-    <p th:if="${#lists.isEmpty(alunos)}">Nenhum aluno cadastrado.</p>
+        <p class="mensagem" th:if="${mensagem}" th:text="${mensagem}"></p>
+        <p class="erro" th:if="${erro}" th:text="${erro}"></p>
 
-    <table th:unless="${#lists.isEmpty(alunos)}" border="1" cellpadding="6">
-        <thead>
-            <tr>
-                <th>Matrícula</th>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Curso</th>
-                <th>Notas</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aluno : ${alunos}">
-                <td th:text="${aluno.matricula}">2024001</td>
-                <td th:text="${aluno.nome}">Nome</td>
-                <td th:text="${aluno.idade}">20</td>
-                <td th:text="${aluno.curso}">Curso</td>
-                <td th:text="${aluno.notas}">[]</td>
-                <td>
-                    <a th:href="@{/alunos/{matricula}/notas(matricula=${aluno.matricula})}">Notas</a> |
-                    <a th:href="@{/alunos/{matricula}/desempenho(matricula=${aluno.matricula})}">Desempenho</a> |
-                    <a th:href="@{/alunos/{matricula}/editar(matricula=${aluno.matricula})}">Editar</a> |
-                    <a th:href="@{/alunos/{matricula}/remover(matricula=${aluno.matricula})}">Remover</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <p><a class="botao" th:href="@{/alunos/novo}">+ Novo aluno</a></p>
 
-    <p><a th:href="@{/}">Voltar ao início</a></p>
+        <div class="card" th:if="${#lists.isEmpty(alunos)}">
+            <p>Nenhum aluno cadastrado.</p>
+        </div>
+
+        <div class="card tabela-wrap" th:unless="${#lists.isEmpty(alunos)}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Curso</th>
+                        <th>Notas</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <td th:text="${aluno.matricula}">2024001</td>
+                        <td th:text="${aluno.nome}">Nome</td>
+                        <td th:text="${aluno.idade}">20</td>
+                        <td th:text="${aluno.curso}">Curso</td>
+                        <td th:text="${aluno.notas}">[]</td>
+                        <td class="acoes">
+                            <a th:href="@{/alunos/{matricula}/notas(matricula=${aluno.matricula})}">Notas</a>
+                            <a th:href="@{/alunos/{matricula}/desempenho(matricula=${aluno.matricula})}">Desempenho</a>
+                            <a th:href="@{/alunos/{matricula}/editar(matricula=${aluno.matricula})}">Editar</a>
+                            <a class="perigo" th:href="@{/alunos/{matricula}/remover(matricula=${aluno.matricula})}">Remover</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
-
 </html>

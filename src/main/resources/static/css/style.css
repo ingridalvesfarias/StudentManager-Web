@@ -1,293 +1,710 @@
+/* =============================================================
+   StudentManager Web 
+   Identidade: Minimalista (azul, branco e neutros)
+
+   Sumário
+   1. Variáveis (tema claro e escuro)
+   2. Base e tipografia
+   3. Cabeçalho e navegação
+   4. Layout principal e cards
+   5. Botões
+   6. Formulários
+   7. Mensagens
+   8. Tabelas
+   9. Indicadores (relatório)
+   10. Selos de situação acadêmica
+   11. Acessibilidade e movimento
+   12. Responsividade
+   ============================================================= */
+
+
+/* -------------------------------------------------------------
+   1. VARIÁVEIS
+   ------------------------------------------------------------- */
+
 :root {
-    --bg: #f5f6fa;
-    --card: #ffffff;
-    --text: #1f2430;
-    --muted: #6b7280;
-    --border: #e5e7eb;
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --on-primary: #ffffff;
-    --ok: #15803d;
-    --ok-bg: #dcfce7;
-    --erro: #b91c1c;
-    --erro-bg: #fee2e2;
-    --aviso: #b45309;
-    --aviso-bg: #fef3c7;
+    color-scheme: light dark;
+
+    /* Superfícies e texto */
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --card-alt: #F1F5F9;
+    --text: #172033;
+    --muted: #64748B;
+    --border: #E2E8F0;
+
+    /* Azul (identidade) */
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --primary-2: #818CF8;
+    --primary-soft: #EEF2FF;
+    --on-primary: #FFFFFF;
+
+    /* Situações acadêmicas (cores de marca, usadas em barras e pontos) */
+    --aprovado: #16A34A;
+    --recuperacao: #D97706;
+    --reprovado: #DC2626;
+
+    /* Variações legíveis para texto sobre fundo suave */
+    --ok: #15803D;
+    --ok-bg: #DCFCE7;
+    --aviso: #B45309;
+    --aviso-bg: #FEF3C7;
+    --erro: #B91C1C;
+    --erro-bg: #FEE2E2;
+    --on-danger: #FFFFFF;
+
+    /* Forma e profundidade */
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 2px rgba(23, 32, 51, 0.04), 0 1px 3px rgba(23, 32, 51, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(23, 32, 51, 0.06), 0 12px 28px -8px rgba(23, 32, 51, 0.12);
+    --ring: 0 0 0 4px rgba(79, 70, 229, 0.16);
+
+    /* Espaçamento e movimento */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #0f1117;
-        --card: #181b23;
-        --text: #e5e7eb;
-        --muted: #9ca3af;
-        --border: #2a2f3a;
-        --primary: #818cf8;
-        --primary-hover: #a5b4fc;
-        --on-primary: #0f1117;
-        --ok: #86efac;
-        --ok-bg: #14351f;
-        --erro: #fca5a5;
-        --erro-bg: #3b1515;
-        --aviso: #fcd34d;
-        --aviso-bg: #3a2d0f;
+        --bg: #0E1116;
+        --card: #161A21;
+        --card-alt: #1C212A;
+        --text: #E6E9EF;
+        --muted: #98A2B3;
+        --border: #262C36;
+
+        --primary: #818CF8;
+        --primary-hover: #A5B4FC;
+        --primary-2: #6366F1;
+        --primary-soft: rgba(129, 140, 248, 0.14);
+        --on-primary: #0E1116;
+
+        --aprovado: #22C55E;
+        --recuperacao: #F59E0B;
+        --reprovado: #EF4444;
+
+        --ok: #4ADE80;
+        --ok-bg: rgba(34, 197, 94, 0.14);
+        --aviso: #FBBF24;
+        --aviso-bg: rgba(245, 158, 11, 0.14);
+        --erro: #F87171;
+        --erro-bg: rgba(239, 68, 68, 0.14);
+        --on-danger: #0E1116;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+        --shadow-md: 0 12px 32px -10px rgba(0, 0, 0, 0.6);
+        --ring: 0 0 0 4px rgba(129, 140, 248, 0.24);
     }
 }
+
+
+/* -------------------------------------------------------------
+   2. BASE E TIPOGRAFIA
+   ------------------------------------------------------------- */
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--text);
-    line-height: 1.5;
+    background-color: var(--bg);
+    background-image: radial-gradient(900px 320px at 50% -120px, var(--primary-soft), transparent);
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+::selection {
+    background: var(--primary-soft);
     color: var(--primary);
 }
 
-/* ---------- Cabeçalho ---------- */
-
-.topo {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-}
-
-.conteudo-topo {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.marca {
-    font-weight: 700;
-    font-size: 1.15rem;
+h1,
+h2,
+h3 {
     color: var(--text);
-    text-decoration: none;
-}
-
-.topo nav a {
-    margin-left: 16px;
-    color: var(--muted);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.topo nav a:hover {
-    color: var(--primary);
-}
-
-/* ---------- Conteúdo ---------- */
-
-main {
-    max-width: 960px;
-    margin: 32px auto;
-    padding: 0 20px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 h1 {
     margin-top: 0;
+    margin-bottom: var(--space-5);
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+    font-weight: 800;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+}
+
+strong {
+    font-weight: 650;
+}
+
+a {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition), background-color var(--transition);
+}
+
+a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* -------------------------------------------------------------
+   3. CABEÇALHO E NAVEGAÇÃO
+   ------------------------------------------------------------- */
+
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--card);
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.conteudo-topo {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0.875rem var(--space-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.marca {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1.125rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.marca:hover {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.topo nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+}
+
+.topo nav a {
+    margin: 0;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.topo nav a:hover {
+    color: var(--primary);
+    background: var(--primary-soft);
+    text-decoration: none;
+}
+
+
+/* -------------------------------------------------------------
+   4. LAYOUT PRINCIPAL E CARDS
+   ------------------------------------------------------------- */
+
+main {
+    max-width: 1040px;
+    margin: var(--space-6) auto;
+    padding: 0 var(--space-5) var(--space-7);
+    min-width: 0;
 }
 
 .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+    box-shadow: var(--shadow-sm);
+    overflow-wrap: anywhere;
 }
 
-/* ---------- Tabelas ---------- */
-
-.tabela-wrap {
-    overflow-x: auto;
+.card h1 {
+    margin-bottom: var(--space-3);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.card p:last-child {
+    margin-bottom: 0;
 }
 
-th,
-td {
-    text-align: left;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-}
 
-th {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-}
-
-tbody tr:hover {
-    background: color-mix(in srgb, var(--primary) 6%, transparent);
-}
-
-.acoes a {
-    margin-right: 10px;
-    white-space: nowrap;
-}
-
-.perigo {
-    color: var(--erro);
-}
-
-/* ---------- Botões ---------- */
+/* -------------------------------------------------------------
+   5. BOTÕES
+   ------------------------------------------------------------- */
 
 .botao,
 button {
     display: inline-block;
+    margin: 0 var(--space-2) var(--space-1) 0;
+    padding: 0.65rem 1.2rem;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
     background: var(--primary);
     color: var(--on-primary);
-    border: 1px solid var(--primary);
-    border-radius: 8px;
-    padding: 10px 18px;
     font: inherit;
+    font-size: 0.95rem;
     font-weight: 600;
-    cursor: pointer;
+    line-height: 1.4;
+    text-align: center;
     text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), border-color var(--transition),
+        color var(--transition), box-shadow var(--transition), transform var(--transition);
 }
 
 .botao:hover,
 button:hover {
     background: var(--primary-hover);
     border-color: var(--primary-hover);
+    color: var(--on-primary);
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.45);
+}
+
+.botao:active,
+button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .botao-secundario {
     background: transparent;
+    border-color: var(--border);
     color: var(--primary);
+    box-shadow: none;
 }
 
 .botao-secundario:hover {
-    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    background: var(--primary-soft);
+    border-color: var(--primary-2);
     color: var(--primary);
+    box-shadow: none;
 }
 
 .botao-perigo {
-    background: var(--erro);
-    border-color: var(--erro);
-    color: var(--card);
+    background: var(--reprovado);
+    border-color: var(--reprovado);
+    color: var(--on-danger);
 }
 
 .botao-perigo:hover {
-    background: var(--erro);
-    border-color: var(--erro);
-    opacity: 0.85;
+    background: var(--reprovado);
+    border-color: var(--reprovado);
+    color: var(--on-danger);
+    opacity: 0.9;
+    box-shadow: 0 6px 16px -4px rgba(220, 38, 38, 0.45);
 }
 
-/* ---------- Formulários ---------- */
+
+/* -------------------------------------------------------------
+   6. FORMULÁRIOS
+   ------------------------------------------------------------- */
 
 .campo {
-    margin-bottom: 18px;
+    margin-bottom: 1.25rem;
 }
 
 label {
     display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 6px;
+    color: var(--text);
 }
 
-input {
+input,
+select,
+textarea {
+    display: block;
     width: 100%;
-    max-width: 420px;
-    padding: 10px 12px;
+    max-width: 460px;
+    padding: 0.7rem 0.9rem;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius);
     background: var(--bg);
     color: var(--text);
     font: inherit;
+    transition: border-color var(--transition), box-shadow var(--transition),
+        background-color var(--transition);
 }
 
-input:focus {
-    outline: 2px solid var(--primary);
-    outline-offset: 1px;
+input::placeholder,
+textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: var(--primary-2);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--card);
+    box-shadow: var(--ring);
+}
+
+/* Campo com erro de validação (realce progressivo, sem alterar o HTML) */
+.campo:has(.erro-campo) input {
+    border-color: var(--reprovado);
+}
+
+.campo:has(.erro-campo) input:focus {
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.16);
 }
 
 .erro-campo {
     display: block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--erro);
-    font-size: 0.875rem;
-    margin-top: 4px;
 }
 
 .form-acoes {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-top: 8px;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
 }
 
-/* ---------- Mensagens ---------- */
+.form-acoes .botao,
+.form-acoes button {
+    margin: 0;
+}
+
+
+/* -------------------------------------------------------------
+   7. MENSAGENS
+   ------------------------------------------------------------- */
+
+@keyframes entrar {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
 
 .mensagem,
 .erro,
 .aviso {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
+    padding: 0.85rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: entrar 220ms ease-out both;
+}
+
+.mensagem::before,
+.erro::before,
+.aviso::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.6rem;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--card);
+    vertical-align: middle;
 }
 
 .mensagem {
     background: var(--ok-bg);
     color: var(--ok);
+    border-color: color-mix(in srgb, var(--aprovado) 28%, transparent);
+}
+
+.mensagem::before {
+    content: "✓";
+    background: var(--aprovado);
 }
 
 .erro {
     background: var(--erro-bg);
     color: var(--erro);
+    border-color: color-mix(in srgb, var(--reprovado) 28%, transparent);
+}
+
+.erro::before {
+    content: "!";
+    background: var(--reprovado);
 }
 
 .aviso {
     background: var(--aviso-bg);
     color: var(--aviso);
+    border-color: color-mix(in srgb, var(--recuperacao) 30%, transparent);
 }
 
-/* ---------- Relatório e desempenho ---------- */
+.aviso::before {
+    content: "i";
+    background: var(--recuperacao);
+}
+
+
+/* -------------------------------------------------------------
+   8. TABELAS
+   ------------------------------------------------------------- */
+
+.tabela-wrap {
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+th,
+td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: var(--space-5);
+}
+
+th:last-child,
+td:last-child {
+    padding-right: var(--space-5);
+}
+
+th {
+    background: var(--card-alt);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+td:first-child {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+tbody tr {
+    transition: background-color var(--transition);
+}
+
+tbody tr:hover {
+    background: var(--card-alt);
+    background: color-mix(in srgb, var(--primary) 5%, transparent);
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+/* Ações da linha: links em formato de pílula */
+.acoes a {
+    display: inline-block;
+    margin: 0.15rem 0.25rem 0.15rem 0;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.acoes a:hover {
+    background: var(--primary);
+    color: var(--on-primary);
+    text-decoration: none;
+}
+
+.perigo {
+    color: var(--erro);
+}
+
+.acoes .perigo {
+    background: var(--erro-bg);
+    color: var(--erro);
+}
+
+.acoes .perigo:hover {
+    background: var(--reprovado);
+    color: var(--on-danger);
+}
+
+
+/* -------------------------------------------------------------
+   9. INDICADORES (RELATÓRIO)
+   ------------------------------------------------------------- */
 
 .resumo {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
 }
 
 .resumo .item {
+    --accent: var(--primary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: 1.25rem 1.25rem 1.1rem;
+    overflow: hidden;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.resumo .item::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--accent);
+}
+
+.resumo .item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Cores por posição: 3 aprovados, 4 recuperação, 5 reprovados, 6 média geral */
+.resumo .item:nth-child(3) {
+    --accent: var(--aprovado);
+}
+
+.resumo .item:nth-child(4) {
+    --accent: var(--recuperacao);
+}
+
+.resumo .item:nth-child(5) {
+    --accent: var(--reprovado);
+}
+
+.resumo .item:nth-child(6) {
+    --accent: var(--primary-2);
+    background: linear-gradient(135deg, var(--primary-soft), var(--card) 70%);
 }
 
 .resumo .numero {
     display: block;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
 }
 
 .resumo .rotulo {
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--muted);
-    font-size: 0.9rem;
 }
 
+
+/* -------------------------------------------------------------
+   10. SELOS DE SITUAÇÃO ACADÊMICA
+   ------------------------------------------------------------- */
+
 .selo {
-    display: inline-block;
-    padding: 4px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 999px;
+    font-size: 0.85rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.selo::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
 }
 
 .selo-aprovado {
@@ -303,4 +720,229 @@ input:focus {
 .selo-reprovado {
     background: var(--erro-bg);
     color: var(--erro);
+}
+
+
+/* -------------------------------------------------------------
+   11. ACESSIBILIDADE E MOVIMENTO
+   ------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary-2);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* -------------------------------------------------------------
+   12. RESPONSIVIDADE
+   ------------------------------------------------------------- */
+
+/* Tablets e notebooks pequenos */
+@media (max-width: 1024px) {
+    main {
+        margin-top: var(--space-5);
+    }
+}
+
+/* Tablets em retrato e celulares grandes:
+   a tabela vira uma lista de cartões, sem rolagem horizontal.
+   Os rótulos vêm de CSS e seguem a ordem das colunas da lista de alunos. */
+@media (max-width: 720px) {
+    .tabela-wrap {
+        overflow: visible;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .tabela-wrap table,
+    .tabela-wrap thead,
+    .tabela-wrap tbody,
+    .tabela-wrap tr,
+    .tabela-wrap th,
+    .tabela-wrap td {
+        display: block;
+    }
+
+    .tabela-wrap thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+
+    .tabela-wrap tbody tr {
+        margin-bottom: var(--space-3);
+        padding: var(--space-2) var(--space-4);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tabela-wrap td,
+    .tabela-wrap td:first-child,
+    .tabela-wrap td:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-4);
+        padding: 0.6rem 0;
+        text-align: right;
+        border-bottom: 1px dashed var(--border);
+    }
+
+    .tabela-wrap tbody tr:last-child td {
+        border-bottom: 1px dashed var(--border);
+    }
+
+    .tabela-wrap tbody tr td:last-child {
+        border-bottom: 0;
+    }
+
+    .tabela-wrap td::before {
+        flex: 0 0 auto;
+        font-size: 0.72rem;
+        font-weight: 650;
+        letter-spacing: 0.06em;
+        text-align: left;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .tabela-wrap td:nth-child(1)::before {
+        content: "Matrícula";
+    }
+
+    .tabela-wrap td:nth-child(2)::before {
+        content: "Nome";
+    }
+
+    .tabela-wrap td:nth-child(3)::before {
+        content: "Idade";
+    }
+
+    .tabela-wrap td:nth-child(4)::before {
+        content: "Curso";
+    }
+
+    .tabela-wrap td:nth-child(5)::before {
+        content: "Notas";
+    }
+
+    .tabela-wrap td:nth-child(6)::before {
+        content: "Ações";
+    }
+
+    .tabela-wrap td.acoes {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .tabela-wrap td.acoes::before {
+        flex-basis: 100%;
+    }
+}
+
+/* Celulares */
+@media (max-width: 640px) {
+    .conteudo-topo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .topo nav {
+        width: 100%;
+    }
+
+    .topo nav a {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 0.45rem 0.6rem;
+    }
+
+    main {
+        margin-top: var(--space-4);
+        padding: 0 var(--space-4) var(--space-6);
+    }
+
+    .card {
+        padding: var(--space-4);
+        border-radius: var(--radius);
+    }
+
+    h1 {
+        margin-bottom: var(--space-4);
+    }
+
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+        font-size: 1rem;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+
+    .botao,
+    button {
+        display: block;
+        width: 100%;
+        margin: 0 0 var(--space-2) 0;
+        padding: 0.8rem 1rem;
+    }
+
+    .form-acoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+        text-align: center;
+    }
+
+    .resumo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+    }
+
+    .resumo .item {
+        padding: 1rem;
+    }
+
+    .mensagem,
+    .erro,
+    .aviso {
+        padding: 0.75rem 0.9rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Telas muito estreitas */
+@media (max-width: 360px) {
+    .card {
+        padding: 0.875rem;
+    }
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
 }

@@ -42,7 +42,7 @@ O relatório geral mostra o total de alunos, avaliados, aprovados, em recuperaç
 
 ## 🖼️ Telas
 
-| Lista de alunos | Cadastro com validação |
+| Lista de alunos | Formulário de Cadastro |
 |---|---|
 | ![Lista de alunos](docs/lista.png) | ![Formulário de cadastro](docs/form.png) |
 

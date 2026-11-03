@@ -36,7 +36,9 @@
                 <td th:text="${aluno.notas}">[]</td>
                 <td>
                     <a th:href="@{/alunos/{matricula}/notas(matricula=${aluno.matricula})}">Notas</a> |
-                    <a th:href="@{/alunos/{matricula}/desempenho(matricula=${aluno.matricula})}">Desempenho</a>
+                    <a th:href="@{/alunos/{matricula}/desempenho(matricula=${aluno.matricula})}">Desempenho</a> |
+                    <a th:href="@{/alunos/{matricula}/editar(matricula=${aluno.matricula})}">Editar</a> |
+                    <a th:href="@{/alunos/{matricula}/remover(matricula=${aluno.matricula})}">Remover</a>
                 </td>
             </tr>
         </tbody>
